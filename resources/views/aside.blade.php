@@ -27,7 +27,7 @@
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Admin Master </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ route('view_district') }}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> District </span></a></li>
-                        <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Sub Division </span></a></li>
+                        <li class="sidebar-item"><a href="{{ route('view_sub_division') }}" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Sub Division </span></a></li>
                     </ul>
                 </li>
                

@@ -58,9 +58,24 @@
                 dist_id: dist_id
             },
             success: function(data) {
-
                 $('#edit-modal-body').html(data)
+            },
 
+        });
+    }
+
+    function showSubDivisionDetails(subdiv_id) {
+        $.ajax({
+            url: "{{ route('update_sub_division_show') }}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {
+                subdiv_id: subdiv_id
+            },
+            success: function(data) {
+                $('#edit-subdiv-modal-body').html(data)
             },
 
         });

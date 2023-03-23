@@ -13,4 +13,9 @@ class District extends Model
     protected $fillable = [
         'dist_name', 'dist_headquarter', 'dist_img', 'display'
     ];
+
+    public function sub_divisions()
+    {
+        return $this->hasMany(SubDivision::class, 'dist_code', 'dist_code');
+    }
 }

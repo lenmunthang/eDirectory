@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\districtController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,12 +43,18 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/add-judicial-officer', 'addJudicialOfficer')->name('add_jud_officer');
     Route::post('/add-judicial-officer', 'storeJudicialOfficer')->name('store_judicial_officer');
     Route::get('/judicial-officer', 'viewJudicialOfficer')->name('view_jud_officer');
+});
 
+Route::controller(districtController::class)->group(function(){
     Route::get('/district', 'viewDistrict')->name('view_district');
     Route::post('/district', 'storeDistrict')->name('store_district');
     Route::delete('/district/{id}', 'deleteDistrict')->name('delete_district');
     Route::post('/show-district', 'updateDistrictShow')->name('update_district_show');
     Route::post('/update-district', 'updateDistrictData')->name('update_district_data');
 
+    Route::get('/sub-division', 'viewSubDivision')->name('view_sub_division');
+    Route::post('/sub-division', 'storeSubDivision')->name('store_sub_division');
+    Route::delete('/sub-division/{id}', 'deleteSubDivision')->name('delete_sub_division');
+    Route::post('/show-sub-division', 'updateSubDivisionShow')->name('update_sub_division_show');
 });
 
