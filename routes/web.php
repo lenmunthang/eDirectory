@@ -56,5 +56,6 @@ Route::controller(districtController::class)->group(function(){
     Route::post('/sub-division', 'storeSubDivision')->name('store_sub_division');
     Route::delete('/sub-division/{id}', 'deleteSubDivision')->name('delete_sub_division');
     Route::post('/show-sub-division', 'updateSubDivisionShow')->name('update_sub_division_show');
+    Route::post('/update-sub-division', 'updateSubDivisionData')->name('sub_div_update_data');
 });
 

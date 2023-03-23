@@ -13,9 +13,9 @@
                 </div>
             @endif
             @include('flash')
-            
+
             <div class="table-responsive">
-                <table id="table_district" class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
@@ -32,14 +32,18 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $district->dist_name }}</td>
                                 <td>{{ $district->dist_headquarter }}</td>
-                                <td>{{ $district->display }}</td>
+                                <td>
+                                    @if ($district->display == 'Y')
+                                        {{ $active = 'Yes' }}
+                                    @else
+                                        {{ $active = 'No' }}
+                                    @endif
+                                </td>
 
                                 <td>
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                         data-target="#edit_district_modal" id="edit_btn_dist"
-                                        onclick="showDistrictDetails({{ $district->dist_code }})">Edit</button>
-                                    {{-- <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip"
-                                        title='Edit'>Edit</a> --}}
+                                        onclick="showDistrictDetails({{$district->dist_code}})">Edit</button>
                                 </td>
                                 <td>
                                     <form method="POST" action="{{ route('delete_district', $district->dist_code) }}">

@@ -13,15 +13,7 @@
                     </ul>
                 </div>
             @endif
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif (session('fail'))
-                <div class="alert alert-danger">
-                    {{ session('fail') }}
-                </div>
-            @endif
+            @include('flash')
 
             <form id="jo-form" method="POST" action="{{ route('store_judicial_officer') }}" class="m-t-40"
                 enctype="multipart/form-data">
@@ -46,20 +38,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="jo_fname" class="col-sm-2 control-label col-form-label">Officer's First Name
-                                *</label>
-                            <div class="input-group col-sm-10">
-                                <div class="input-group-prepend">
-                                    <select id="jo_initials" name="jo_initials" class=" form-control">
-                                        <option value="Mr">Mr.</option>
-                                        <option value="Mrs">Mrs.</option>
-                                        <option value="Ms">Ms.</option>
-                                    </select>
-                                </div>&nbsp;
-                                <input type="text" class="required form-control" name="jo_fname" id="jo_fname"
-                                    placeholder="First Name Here">
+                            <label for="jo_fname" class="col-sm-2 control-label col-form-label">Officer's First Name *</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">                                    
+                                    <div class="input-group-prepend">
+                                        <select id="jo_initials" name="jo_initials" class="form-control">
+                                            <option value="Mr">Mr.</option>
+                                            <option value="Mrs">Mrs.</option>
+                                            <option value="Ms">Ms.</option>
+                                        </select>
+                                    </div>&nbsp;
+                                    <input type="text" class="required form-control" name="jo_fname" id="jo_fname" placeholder="First Name Here">
+                                </div>
                             </div>
-                        </div>
+                        </div>                        
+                        
                         <div class="form-group row">
                             <label for="jo_mname" class="col-sm-2 control-label col-form-label">Officer's Middle
                                 Name</label>
@@ -109,19 +102,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jo_priority" class="col-sm-3 control-label col-form-label">Judicial Officer's Priority</label>
+                            <label for="jo_priority" class="col-sm-3 control-label col-form-label">Judicial Officer's
+                                Priority</label>
                             <div class="col-sm-8">
                                 <input id="jo_priority" name="jo_priority" type="text" class=" form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jo_desg" class="col-sm-3 control-label col-form-label">Judicial Officer's Designation *</label>
+                            <label for="jo_desg" class="col-sm-3 control-label col-form-label">Judicial Officer's
+                                Designation *</label>
                             <div class="col-sm-8">
                                 <input id="jo_desg" name="jo_desg" type="text" class="required form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jo_code" class="col-sm-3 control-label col-form-label">Judicial Officer's Code</label>
+                            <label for="jo_code" class="col-sm-3 control-label col-form-label">Judicial Officer's
+                                Code</label>
                             <div class="col-sm-8">
                                 <input id="jo_code" name="jo_code" type="text" class=" form-control">
                             </div>
@@ -129,22 +125,24 @@
                         <div class="form-group row">
                             {{-- <label for="jo_status">Judicial Officer's Status *</label> --}}
                             {{-- <div class="form-check-inline"> --}}
-                                <label for="jo_mslsa" class="col-sm-3 control-label col-form-label">Meghalays State Legal Services Authority</label>
-                                <div class="col-sm-8">
-                                    <input id="jo_mslsa" name="jo_mslsa" type="checkbox" value="mslsa">
-                                </div>
-                                {{-- <input class="form-check-input" type="radio" name="jo_status" id="active_jo"
+                            <label for="jo_mslsa" class="col-sm-3 control-label col-form-label">Meghalays State Legal
+                                Services Authority</label>
+                            <div class="col-sm-8">
+                                <input id="jo_mslsa" name="jo_mslsa" type="checkbox" value="mslsa">
+                            </div>
+                            {{-- <input class="form-check-input" type="radio" name="jo_status" id="active_jo"
                                 value="active" checked>
                             <label class="form-check-label" for="active_jo">Active</label> --}}
                             {{-- </div> --}}
                         </div>
                         <div class="form-group row">
                             {{-- <div class="form-check-inline"> --}}
-                                <label for="jo_msja" class="col-sm-3 control-label col-form-label">Meghalays State Judicial Academy</label>
-                                <div class="col-sm-8">
-                                    <input id="jo_msja" name="jo_msja" type="checkbox" value="msja">
-                                </div>
-                                {{-- <input class="form-check-input" type="radio" name="jo_status" id="inactive_jo"
+                            <label for="jo_msja" class="col-sm-3 control-label col-form-label">Meghalays State Judicial
+                                Academy</label>
+                            <div class="col-sm-8">
+                                <input id="jo_msja" name="jo_msja" type="checkbox" value="msja">
+                            </div>
+                            {{-- <input class="form-check-input" type="radio" name="jo_status" id="inactive_jo"
                                 value="inactive">
                             <label class="form-check-label" for="inactive_jo">Inactive</label> --}}
                             {{-- </div> --}}
@@ -157,7 +155,8 @@
                         <label for="jo_msja">Meghalays State Judicial Academy</label>
                         <input id="jo_msja" name="jo_msja" type="checkbox" value="msja"> --}}
                         <div class="form-group row">
-                            <label for="jo_pop" class="col-sm-3 control-label col-form-label">Officer's Place of Posting *</label>
+                            <label for="jo_pop" class="col-sm-3 control-label col-form-label">Officer's Place of Posting
+                                *</label>
                             <div class="col-sm-8">
                                 <select id="jo_pop" name="jo_pop"
                                     class="required select2 form-control custom-select">
@@ -176,13 +175,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jo_qual" class="col-sm-3 control-label col-form-label">Education Qualification *</label>
+                            <label for="jo_qual" class="col-sm-3 control-label col-form-label">Education Qualification
+                                *</label>
                             <div class="col-sm-8">
                                 <input id="jo_qual" name="jo_qual" type="text" class="required form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="dt_appt" class="col-sm-3 control-label col-form-label">Date of Apppointment</label>
+                            <label for="dt_appt" class="col-sm-3 control-label col-form-label">Date of
+                                Apppointment</label>
                             <div class="col-sm-8">
                                 <input id="dt_appt" name="dt_appt" type="date" class=" form-control"
                                     onfocus="this.showPicker()">
@@ -192,14 +193,30 @@
                     </section>
                     <h3>Contact</h3>
                     <section>
-                        <label for="telephone">Telephone Number</label>
-                        <input id="telephone" name="telephone" type="text" class=" form-control">
-                        <label for="fax">Fax Number</label>
-                        <input id="fax" name="fax" type="text" class=" form-control">
-                        <label for="mobile">Mobile Number</label>
-                        <input id="mobile" name="mobile" type="text" class=" form-control">
-                        <label for="email">Email ID</label>
-                        <input id="email" name="email" type="text" class=" email form-control">
+                        <div class="form-group row">
+                            <label for="telephone" class="col-sm-2 control-label col-form-label">Telephone Number</label>
+                            <div class="col-sm-8">
+                                <input id="telephone" name="telephone" type="text" class=" form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fax" class="col-sm-2 control-label col-form-label">Fax Number</label>
+                            <div class="col-sm-8">
+                                <input id="fax" name="fax" type="text" class=" form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobile" class="col-sm-2 control-label col-form-label">Mobile Number</label>
+                            <div class="col-sm-8">
+                                <input id="mobile" name="mobile" type="text" class=" form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 control-label col-form-label">Email ID</label>
+                            <div class="col-sm-8">
+                                <input id="email" name="email" type="text" class=" form-control">
+                            </div>
+                        </div>
                     </section>
                 </div>
             </form>

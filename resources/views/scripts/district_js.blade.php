@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $('#table_district').DataTable();
+    $('.table').DataTable();
 
     $(document).ready(function() {
         $('.alert').fadeIn().delay(3000).fadeOut();
@@ -28,7 +28,7 @@
             }
         });
 
-        $("#table_district").on('click', '.show_confirm', function(event) {
+        $(".table").on('click', '.show_confirm', function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();

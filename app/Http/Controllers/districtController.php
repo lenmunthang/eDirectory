@@ -138,9 +138,35 @@ class districtController extends Controller
 
         $subdiv_id = $request->subdiv_id;
         $sub_division_data = SubDivision::with('district')->where('sub_div_code', $subdiv_id)->get();
-        // echo "<pre>";
-        // print_r($sub_division_data[0]->district->dist_name);
-        // exit;
         return view('sub_division_details', compact('sub_division_data'));
     }
+
+    public function updateSubDivisionData(Request $request)
+    {
+        $this->validate($request, [
+            'sub_div_name_edit' => 'required|max:50|string',
+            'sub_div_dist_edit' => 'required|max:50|string'
+        ]);
+        try {
+            $sub_div_update = SubDivision::find($request->sub_div_code_edit);
+            $sub_div_update->sub_div_name = $request->sub_div_name_edit;
+            $sub_div_update->display = $request->active_edit_sub_div;
+            $sub_div_update->save();
+            return redirect()->route('view_sub_division')->with('success', 'Updated Successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('view_sub_division')->with('fail', 'Error! Updation Unsuccessfully.');
+        }        
+    }
+
+    public function deleteSubDivision($id)
+    {
+        try {
+            $sub_div = SubDivision::find($id);
+            $sub_div->delete();
+            return redirect()->route('view_sub_division')->with('success', 'Deleted Successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('view_sub_division')->with('fail', 'Error! Deletion Unsuccessfully.');
+        }
+    }
+
 }

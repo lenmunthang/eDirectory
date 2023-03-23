@@ -13,9 +13,9 @@
                 </div>
             @endif
             @include('flash')
-            
+
             <div class="table-responsive">
-                <table id="table_district" class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
@@ -32,17 +32,22 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $sub_division->district->dist_name }}</td>
                                 <td>{{ $sub_division->sub_div_name }}</td>
-                                <td>{{ $sub_division->display }}</td>
+                                <td>
+                                    @if ($sub_division->display == 'Y')
+                                        {{ $active = 'Yes' }}
+                                    @else
+                                        {{ $active = 'No' }}
+                                    @endif
+                                </td>
 
                                 <td>
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                         data-target="#edit_sub_div_modal" id="edit_btn_sub_div"
                                         onclick="showSubDivisionDetails({{ $sub_division->sub_div_code }})">Edit</button>
-                                    {{-- <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip"
-                                        title='Edit'>Edit</a> --}}
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ route('delete_sub_division', $sub_division->sub_div_code) }}">
+                                    <form method="POST"
+                                        action="{{ route('delete_sub_division', $sub_division->sub_div_code) }}">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
@@ -71,7 +76,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Sub Division</h5>
                 </div>
-                <form id="frmSubDivision" action="{{ route('store_sub_division') }}" method="POST" enctype="multipart/form-data">
+                <form id="frmSubDivision" action="{{ route('store_sub_division') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group row">
@@ -80,7 +86,7 @@
                                 <select class="form-control" id="dist_code" name="dist_code" required>
                                     <option value="">Select District</option>
                                     @foreach ($district_list as $district)
-                                    <option value="{{$district->dist_code}}">{{$district->dist_name}}</option>
+                                        <option value="{{ $district->dist_code }}">{{ $district->dist_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -120,8 +126,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Sub Division</h5>
                 </div>
-                <form id="frmSubDivision_update" action="#" method="POST"
-                    enctype="multipart/form-data">
+                <form id="frmSubDivision_update" action="{{ route('sub_div_update_data') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body" id="edit-subdiv-modal-body">
                         {{-- modal body comes from ajax call  --}}
