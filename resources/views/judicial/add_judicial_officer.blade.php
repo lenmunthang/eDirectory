@@ -155,15 +155,27 @@
                         <label for="jo_msja">Meghalays State Judicial Academy</label>
                         <input id="jo_msja" name="jo_msja" type="checkbox" value="msja"> --}}
                         <div class="form-group row">
-                            <label for="jo_pop" class="col-sm-3 control-label col-form-label">Officer's Place of Posting
+                            <label for="jo_pop" class="col-sm-3 control-label col-form-label">Place of Posting
                                 *</label>
                             <div class="col-sm-8">
                                 <select id="jo_pop" name="jo_pop"
-                                    class="required select2 form-control custom-select">
-                                    <option value="0">Select District</option>
-                                    <option value="1">Grade - I</option>
-                                    <option value="2">Grade - II</option>
-                                    <option value="3">Grade - III</option>
+                                    class="required select2 form-control" multiple="multiple" >
+                                    <option value="">Select District</option>
+                                    @foreach ($district as $dist)
+                                    <option value="{{ $dist->dist_code }}">{{ $dist->dist_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jo_pop_sub_div" class="col-sm-3 control-label col-form-label">Sub Division</label>
+                            <div class="col-sm-8">
+                                <select id="jo_pop_sub_div" name="jo_pop_sub_div"
+                                    class="select2 form-control" multiple="multiple" >
+                                    <option value="">Select Sub Division</option>
+                                    @foreach ($district as $dist)
+                                    <option value="{{ $dist->dist_code }}">{{ $dist->dist_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

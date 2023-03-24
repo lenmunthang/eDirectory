@@ -7,6 +7,7 @@ use App\Models\Judge;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -145,8 +146,9 @@ class UserController extends Controller
 
 
     public function addJudicialOfficer()
-    {
-        return view('judicial.add_judicial_officer');
+    {   
+        $district = District::all();
+        return view('judicial.add_judicial_officer', compact('district'));
     }
 
     public function storeJudicialOfficer()

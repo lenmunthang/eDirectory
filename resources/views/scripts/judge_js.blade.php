@@ -32,7 +32,8 @@
     });
 
     $(document).ready(function() {
-
+        $('.alert-success').fadeIn().delay(3000).fadeOut();
+        
         $('#inactive_judges').hide();
         $("input[id$='active_judges_rd']").click(function() {
             $('#active_judges').show();

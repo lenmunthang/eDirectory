@@ -15,6 +15,7 @@
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/select2/dist/css/select2.min.css')}}">
     
     <style>
         .form-check-label:hover {
@@ -60,8 +61,9 @@
     <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{asset('assets/libs/select2/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/libs/select2/dist/js/select2.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    
     @yield('customjs')
 </body>
 

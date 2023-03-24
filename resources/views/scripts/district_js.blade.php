@@ -2,7 +2,7 @@
     $('.table').DataTable();
 
     $(document).ready(function() {
-        $('.alert').fadeIn().delay(3000).fadeOut();
+        $('.alert-success').fadeIn().delay(3000).fadeOut();
 
         $('#dist_img').change(function() {
             let file = this.files[0];

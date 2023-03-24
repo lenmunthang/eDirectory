@@ -42,7 +42,7 @@ class districtController extends Controller
         } catch (Exception $e) {
             // dd($e->getMessage());
             // exit;
-            return redirect()->route('view_district')->with('fail', 'Error! District Not Added.');
+            return redirect()->route('view_district')->with('fail', 'ERROR WHILE ADDING! Message: '. $e->getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ class districtController extends Controller
             }
             return redirect()->route('view_district')->with('success', 'Deleted Successfully.');
         } catch (Exception $e) {
-            return redirect()->route('view_district')->with('fail', 'Error! Deletion Unsuccessfully.');
+            return redirect()->route('view_district')->with('fail', 'Error! Deletion Unsuccessfully.' . $e->getMessage());
         }
     }
 
@@ -98,7 +98,7 @@ class districtController extends Controller
             $district_edit->save();
             return redirect()->route('view_district')->with('success', 'Updated Successfully.');
         } catch (Exception $e) {
-            return redirect()->route('view_district')->with('fail', 'Error! Updation Unsuccessfully.');
+            return redirect()->route('view_district')->with('fail', 'Error! Updation Unsuccessfully.' . $e->getMessage());
         }        
     }
 
@@ -129,7 +129,7 @@ class districtController extends Controller
         } catch (Exception $e) {
             // dd($e->getMessage());
             // exit;
-            return redirect()->route('view_sub_division')->with('fail', 'Error! Sub Division Not Added.');
+            return redirect()->route('view_sub_division')->with('fail', 'Error! Sub Division Not Added.' . $e->getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ class districtController extends Controller
             $sub_div_update->save();
             return redirect()->route('view_sub_division')->with('success', 'Updated Successfully.');
         } catch (Exception $e) {
-            return redirect()->route('view_sub_division')->with('fail', 'Error! Updation Unsuccessfully.');
+            return redirect()->route('view_sub_division')->with('fail', 'Error! Updation Unsuccessfully.' . $e->getMessage());
         }        
     }
 
@@ -165,7 +165,7 @@ class districtController extends Controller
             $sub_div->delete();
             return redirect()->route('view_sub_division')->with('success', 'Deleted Successfully.');
         } catch (Exception $e) {
-            return redirect()->route('view_sub_division')->with('fail', 'Error! Deletion Unsuccessfully.');
+            return redirect()->route('view_sub_division')->with('fail', 'Error! Deletion Unsuccessfully.' . $e->getMessage());
         }
     }
 

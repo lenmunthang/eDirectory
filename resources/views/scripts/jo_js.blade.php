@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    $(".select2").select2();
     // Basic Example with form
     var form = $("#jo-form");
     form.validate({
@@ -119,7 +120,7 @@
         //     });
         // });
 
-        $("#table_active").on('click','.show_confirm', function(event) {
+        $("#table_active").on('click', '.show_confirm', function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
@@ -136,7 +137,7 @@
                 });
         });
 
-        $("#table_inactive").on('click','.show_confirm', function(event) {
+        $("#table_inactive").on('click', '.show_confirm', function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
