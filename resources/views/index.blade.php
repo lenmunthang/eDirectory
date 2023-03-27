@@ -12,11 +12,12 @@
     <link href="{{asset('assets/libs/jquery-steps/jquery.steps.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/libs/jquery-steps/steps.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
-    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/select2/dist/css/select2.min.css')}}">
-    
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/jquery-minicolors/jquery.minicolors.css')}}">
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     <style>
         .form-check-label:hover {
             cursor: pointer;
@@ -48,6 +49,8 @@
     <script src="{{ asset('dist/js/waves.js') }}"></script>
     <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('dist/js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js')}}"></script>
+    <script src="{{ asset('dist/js/pages/mask/mask.init.js')}}"></script>
     <script src="{{ asset('assets/libs/flot/excanvas.js') }}"></script>
     <script src="{{ asset('assets/libs/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('assets/libs/flot/jquery.flot.pie.js') }}"></script>
@@ -63,6 +66,10 @@
     <script src="{{ asset('assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{asset('assets/libs/select2/dist/js/select2.full.min.js')}}"></script>
     <script src="{{asset('assets/libs/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('assets/libs/jquery-asColor/dist/jquery-asColor.min.js')}}"></script>
+    <script src="{{asset('assets/libs/jquery-asGradient/dist/jquery-asGradient.js')}}"></script>
+    <script src="{{asset('assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js')}}"></script>
+    <script src="{{asset('assets/libs/jquery-minicolors/jquery.minicolors.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     @yield('customjs')
 </body>

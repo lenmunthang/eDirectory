@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Judge;
+use App\Models\SubDivision;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -147,8 +148,8 @@ class UserController extends Controller
 
     public function addJudicialOfficer()
     {   
-        $district = District::all();
-        return view('judicial.add_judicial_officer', compact('district'));
+        $pop = District::with('sub_divisions')->get();
+        return view('judicial.add_judicial_officer', compact('pop'));
     }
 
     public function storeJudicialOfficer()

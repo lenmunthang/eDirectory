@@ -38,9 +38,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="jo_fname" class="col-sm-2 control-label col-form-label">Officer's First Name *</label>
+                            <label for="jo_fname" class="col-sm-2 control-label col-form-label">Officer's First Name
+                                *</label>
                             <div class="col-sm-10">
-                                <div class="input-group">                                    
+                                <div class="input-group">
                                     <div class="input-group-prepend">
                                         <select id="jo_initials" name="jo_initials" class="form-control">
                                             <option value="Mr">Mr.</option>
@@ -48,11 +49,12 @@
                                             <option value="Ms">Ms.</option>
                                         </select>
                                     </div>&nbsp;
-                                    <input type="text" class="required form-control" name="jo_fname" id="jo_fname" placeholder="First Name Here">
+                                    <input type="text" class="required form-control" name="jo_fname" id="jo_fname"
+                                        placeholder="First Name Here">
                                 </div>
                             </div>
-                        </div>                        
-                        
+                        </div>
+
                         <div class="form-group row">
                             <label for="jo_mname" class="col-sm-2 control-label col-form-label">Officer's Middle
                                 Name</label>
@@ -93,7 +95,7 @@
                         <div class="form-group row">
                             <label for="jo_grade" class="col-sm-3 control-label col-form-label">Officer's Grade *</label>
                             <div class="col-sm-8">
-                                <select id="jo_grade" name="jo_grade" class="required select2 form-control custom-select">
+                                <select id="jo_grade" name="jo_grade" class="required select form-control custom-select">
                                     <option value="">Select Grade</option>
                                     <option value="1">Grade - I</option>
                                     <option value="2">Grade - II</option>
@@ -123,58 +125,34 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            {{-- <label for="jo_status">Judicial Officer's Status *</label> --}}
-                            {{-- <div class="form-check-inline"> --}}
                             <label for="jo_mslsa" class="col-sm-3 control-label col-form-label">Meghalays State Legal
                                 Services Authority</label>
                             <div class="col-sm-8">
                                 <input id="jo_mslsa" name="jo_mslsa" type="checkbox" value="mslsa">
                             </div>
-                            {{-- <input class="form-check-input" type="radio" name="jo_status" id="active_jo"
-                                value="active" checked>
-                            <label class="form-check-label" for="active_jo">Active</label> --}}
-                            {{-- </div> --}}
                         </div>
                         <div class="form-group row">
-                            {{-- <div class="form-check-inline"> --}}
                             <label for="jo_msja" class="col-sm-3 control-label col-form-label">Meghalays State Judicial
                                 Academy</label>
                             <div class="col-sm-8">
                                 <input id="jo_msja" name="jo_msja" type="checkbox" value="msja">
                             </div>
-                            {{-- <input class="form-check-input" type="radio" name="jo_status" id="inactive_jo"
-                                value="inactive">
-                            <label class="form-check-label" for="inactive_jo">Inactive</label> --}}
-                            {{-- </div> --}}
                         </div>
 
-
-
-                        {{-- <label for="jo_mslsa">Meghalays State Legal Services Authority</label>
-                        <input id="jo_mslsa" name="jo_mslsa" type="checkbox" value="mslsa">
-                        <label for="jo_msja">Meghalays State Judicial Academy</label>
-                        <input id="jo_msja" name="jo_msja" type="checkbox" value="msja"> --}}
                         <div class="form-group row">
-                            <label for="jo_pop" class="col-sm-3 control-label col-form-label">Place of Posting
-                                *</label>
+                            <label class="col-sm-3">Place of Posting *</label>
                             <div class="col-sm-8">
-                                <select id="jo_pop" name="jo_pop"
-                                    class="required select2 form-control" multiple="multiple" >
-                                    <option value="">Select District</option>
-                                    @foreach ($district as $dist)
-                                    <option value="{{ $dist->dist_code }}">{{ $dist->dist_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="jo_pop_sub_div" class="col-sm-3 control-label col-form-label">Sub Division</label>
-                            <div class="col-sm-8">
-                                <select id="jo_pop_sub_div" name="jo_pop_sub_div"
-                                    class="select2 form-control" multiple="multiple" >
-                                    <option value="">Select Sub Division</option>
-                                    @foreach ($district as $dist)
-                                    <option value="{{ $dist->dist_code }}">{{ $dist->dist_name }}</option>
+                                <select id="jo_pop" name="jo_pop[]" class="required select2 form-control"
+                                    multiple="multiple" style="height: 36px;width: 100%;">
+                                    @foreach ($pop as $dist)
+                                        <optgroup label="{{ $dist->dist_name }}">
+                                            <option value="{{ $dist->dist_code }}">{{ $dist->dist_headquarter }}
+                                            </option>
+                                            @foreach ($dist->sub_divisions as $subdiv)
+                                                <option value="{{ $subdiv->sub_div_code }}">{{ $subdiv->sub_div_name }}
+                                                </option>
+                                            @endforeach
+                                        </optgroup>
                                     @endforeach
                                 </select>
                             </div>

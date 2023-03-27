@@ -1,4 +1,3 @@
-<footer class="footer text-center">
-    All Rights Reserved by Matrix-admin. Designed and Developed by <a
-        href="https://wrappixel.com">WrapPixel</a>.
+<footer class="footer text-center">Designed and Developed by <a
+        href="https://meghalayahighcourt.nic.in/">High Court of Meghalaya</a>.
 </footer>

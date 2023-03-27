@@ -1,5 +1,4 @@
 <script type="text/javascript">
-    $(".select2").select2();
     // Basic Example with form
     var form = $("#jo-form");
     form.validate({
@@ -31,7 +30,7 @@
     });
 
     $(document).ready(function() {
-
+        $(".select2").select2();
         $('#inactive_jud').hide();
         $("input[id$='active_judges_rd']").click(function() {
             $('#active_judges').show();
@@ -70,12 +69,6 @@
             fullNameInput.val(fullName);
         }
 
-        //photo upload
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
         $('#image').change(function() {
             let file = this.files[0];
             let fileType = file['type'];
@@ -99,26 +92,6 @@
                 reader.readAsDataURL(file);
             }
         });
-        // $('#btn_img_upload').click(function(e) {
-        //     // alert();exit();
-        //     e.preventDefault();
-        //     var formData = new FormData(this);
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: "{{ url('img_upload') }}",
-        //         data: formData,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: (data) => {
-        //             this.reset();
-        //             alert('Image has been uploaded using jQuery ajax successfully');
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //         }
-        //     });
-        // });
 
         $("#table_active").on('click', '.show_confirm', function(event) {
             var form = $(this).closest("form");
@@ -152,6 +125,11 @@
                         form.submit();
                     }
                 });
+        });
+
+        $('#jo_pop').change(function() {
+            var s=$('#jo_pop').val();
+            alert(s); exit();
         });
     });
 </script>
