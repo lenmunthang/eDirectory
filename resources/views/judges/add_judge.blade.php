@@ -84,7 +84,6 @@
                     </section>
                     <h3>Upload Photo</h3>
                     <section>
-                        {{-- <form action="javascript:void(0)" method="POST" enctype="multipart/form-data" id="img_upload"> --}}
                         <div id="image-upload-error" class="text-danger"></div>
                         <img src="{{ asset('assets/images/users/1.jpg') }}" alt="Profile Photo" class="img-fluid mb-2"
                             style="width: 300px; height: 300px;" id="preview-image-before-upload">
@@ -93,8 +92,6 @@
                             <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
                         </div>
                         <div id="progress-bar"></div>
-                        {{-- <input type="button" class="btn btn-primary" id="btn_img_upload" name="btn_img_upload" value="Upload"> --}}
-                        {{-- </form> --}}
                     </section>
                     <h3>Details</h3>
                     <section>

@@ -26,12 +26,12 @@
                             <div class="col-sm-10">
                                 <div class="form-check-inline">
                                     <input class="form-check-input" type="radio" name="jo_status" id="active_jo"
-                                        value="active" checked>
+                                        value="Y" checked>
                                     <label class="form-check-label" for="active_jo">Active</label>
                                 </div>
                                 <div class="form-check-inline">
                                     <input class="form-check-input" type="radio" name="jo_status" id="inactive_jo"
-                                        value="inactive">
+                                        value="N">
                                     <label class="form-check-label" for="inactive_jo">Inactive</label>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             style="width: 300px; height: 300px;" id="preview-image-before-upload">
                         <div class="form-group">
                             <label for="profile-photo">Upload Photo</label>
-                            <input type="file" class="form-control-file" id="jo_image" name="jo_image">
+                            <input type="file" class="form-control-file" id="jo_image" name="jo_image" accept="image/*">
                         </div>
                     </section>
                     <h3>Details</h3>
@@ -107,14 +107,8 @@
                             <label for="jo_priority" class="col-sm-3 control-label col-form-label">Judicial Officer's
                                 Priority</label>
                             <div class="col-sm-8">
-                                <input id="jo_priority" name="jo_priority" type="text" class=" form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="jo_desg" class="col-sm-3 control-label col-form-label">Judicial Officer's
-                                Designation *</label>
-                            <div class="col-sm-8">
-                                <input id="jo_desg" name="jo_desg" type="text" class="required form-control">
+                                <input id="jo_priority" name="jo_priority" type="text" class=" form-control"
+                                    readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -122,6 +116,13 @@
                                 Code</label>
                             <div class="col-sm-8">
                                 <input id="jo_code" name="jo_code" type="text" class=" form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jo_desg" class="col-sm-3 control-label col-form-label">Judicial Officer's
+                                Designation *</label>
+                            <div class="col-sm-8">
+                                <input id="jo_desg" name="jo_desg" type="text" class="required form-control">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -142,21 +143,32 @@
                         <div class="form-group row">
                             <label class="col-sm-3">Place of Posting *</label>
                             <div class="col-sm-8">
-                                <select id="jo_pop" name="jo_pop[]" class="required select2 form-control"
-                                    multiple="multiple" style="height: 36px;width: 100%;">
+                                <select id="jo_pop_district" name="jo_pop_district[]"
+                                    class="required select2 form-control" multiple="multiple"
+                                    style="height: 36px;width: 100%;">
                                     @foreach ($pop as $dist)
                                         <optgroup label="{{ $dist->dist_name }}">
                                             <option value="{{ $dist->dist_code }}">{{ $dist->dist_headquarter }}
                                             </option>
-                                            @foreach ($dist->sub_divisions as $subdiv)
-                                                <option value="{{ $subdiv->sub_div_code }}">{{ $subdiv->sub_div_name }}
-                                                </option>
-                                            @endforeach
                                         </optgroup>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3">Sub-Division</label>
+                            <div class="col-sm-8">
+                                <select id="jo_pop_sub_div" name="jo_pop_sub_div[]" class="select2 form-control"
+                                    multiple="multiple" style="height: 36px;width: 100%;">
+                                    @foreach ($pop_sub_div as $subdiv)
+                                        <option value="{{ $subdiv->sub_div_code }}">{{ $subdiv->sub_div_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="jo_dob" class="col-sm-3 control-label col-form-label">Date of Birth *</label>
                             <div class="col-sm-8">

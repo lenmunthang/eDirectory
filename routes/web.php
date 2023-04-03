@@ -30,6 +30,7 @@ Route::controller(UserController::class)->middleware('auth')->group(function(){
     Route::get('/add-judicial-officer', 'addJudicialOfficer')->name('add_jud_officer');
     Route::post('/add-judicial-officer', 'storeJudicialOfficer')->name('store_judicial_officer');
     Route::get('/judicial-officer', 'viewJudicialOfficer')->name('view_jud_officer');
+    Route::post('/grade-data', 'gradeData')->name('grade_data');
 });
 
 Route::controller(districtController::class)->middleware('auth')->group(function(){
@@ -44,5 +45,7 @@ Route::controller(districtController::class)->middleware('auth')->group(function
     Route::delete('/sub-division/{id}', 'deleteSubDivision')->name('delete_sub_division');
     Route::post('/show-sub-division', 'updateSubDivisionShow')->name('update_sub_division_show');
     Route::post('/update-sub-division', 'updateSubDivisionData')->name('sub_div_update_data');
+
+    
 });
 

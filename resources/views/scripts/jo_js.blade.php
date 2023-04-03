@@ -1,5 +1,6 @@
 <script type="text/javascript">
     // Basic Example with form
+
     var form = $("#jo-form");
     form.validate({
         errorPlacement: function errorPlacement(error, element) {
@@ -69,7 +70,7 @@
             fullNameInput.val(fullName);
         }
 
-        $('#image').change(function() {
+        $('#jo_image').change(function() {
             let file = this.files[0];
             let fileType = file['type'];
             let validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -78,7 +79,7 @@
                 $('#image-upload-error').html(
                     'Invalid image type. Please select a JPEG, PNG or GIF file.');
                 // reset the file input
-                $('#image').val('');
+                $('#jo_image').val('');
                 // clear the preview image
                 $('#preview-image-before-upload').attr('src', 'assets/images/users/1.jpg');
             } else {
@@ -127,9 +128,33 @@
                 });
         });
 
-        $('#jo_pop').change(function() {
-            var s=$('#jo_pop').val();
-            alert(s); exit();
+        $('#jo_grade').on('change', function() {
+            var grade_val = $(this).val();
+            if (grade_val == "") {
+                $('#jo_priority').val("");
+            } else {
+                $.ajax({
+                    url: "{{ route('grade_data') }}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        grade_val: grade_val
+                    },
+                    success: function(data) {
+                        if (data !== '') {
+                            $('#jo_priority').val(data);
+                        } else {
+                            $('#jo_priority').val('');
+                        }
+                    },
+                    error: function() {
+                        alert('Error retrieving data.');
+                    }
+                });
+            }
+
         });
     });
 </script>

@@ -72,12 +72,6 @@
             fullNameInput.val(fullName);
         }
 
-        //photo upload
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
         $('#image').change(function() {
             let file = this.files[0];
             let fileType = file['type'];
@@ -101,26 +95,6 @@
                 reader.readAsDataURL(file);
             }
         });
-        // $('#btn_img_upload').click(function(e) {
-        //     // alert();exit();
-        //     e.preventDefault();
-        //     var formData = new FormData(this);
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: "{{ url('img_upload') }}",
-        //         data: formData,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: (data) => {
-        //             this.reset();
-        //             alert('Image has been uploaded using jQuery ajax successfully');
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //         }
-        //     });
-        // });
 
         $("#table_active").on('click', '.show_confirm', function(event) {
             var form = $(this).closest("form");

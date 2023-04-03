@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Judge;
+use App\Models\JudicialOfficers;
 use App\Models\SubDivision;
 use App\Models\User;
 use Exception;
@@ -61,13 +62,13 @@ class UserController extends Controller
 
     public function storeJudge(Request $request)
     {
-        // echo "<pre>";
-        // print_r($request->all());
-        // exit;
+        echo "<pre>";
+        print_r($request->all());
+        exit;
         $this->validate($request, [
-            'judge_full_name' => 'required|min:3|max:225|string',
+            'judge_full_name' => 'required|max:225|string',
             'judge_dob' => 'required|date',
-            'judge_qual' => 'required|min:2|max:225|string',
+            'judge_qual' => 'required|max:225|string',
             'dt_enroll' => 'required|date',
             'judge_desg' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:50000',
@@ -83,9 +84,17 @@ class UserController extends Controller
             if (!$request->hasFile('image')) {
                 $img_url = null;
             } else {
+                // $image = $request->file('image');
+                // $new_name = $request->input('judge_full_name') . '.' . $image->getClientOriginalExtension();
+                // $image->move(public_path('upload/judge'), $new_name);
+                // $img_url = "upload/judge/" . $new_name;
                 $image = $request->file('image');
                 $new_name = $request->input('judge_full_name') . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('upload/judge'), $new_name);
+                $folder_path = public_path('upload/judge');
+                if (!is_dir($folder_path)) {
+                    mkdir($folder_path, 0755, true);
+                }
+                $image->move($folder_path, $new_name);
                 $img_url = "upload/judge/" . $new_name;
             }
 
@@ -110,9 +119,7 @@ class UserController extends Controller
             $judge->save();
             return redirect()->route('add_judge')->with('success', 'Judge Added Successfully.');
         } catch (Exception $e) {
-            // dd($e->getMessage());
-            // exit;
-            return redirect()->route('add_judge')->with('fail', 'Error! Judge not added.');
+            return redirect()->route('add_judge')->with('fail', 'Error! Judge not added.' . $e->getMessage());
         }
     }
 
@@ -126,7 +133,7 @@ class UserController extends Controller
             }
             return redirect()->route('judges_list')->with('success', 'Deleted Successfully.');
         } catch (Exception $e) {
-            return redirect()->route('judges_list')->with('fail', 'Error! Deletion Unsuccessfully.');
+            return redirect()->route('judges_list')->with('fail', 'Error! Deletion Unsuccessfully.' . $e->getMessage());
         }
     }
 
@@ -145,16 +152,81 @@ class UserController extends Controller
         return view('judges.update_judge', compact('updateJudgeShow', 'judge_seniority'));
     }
 
-
     public function addJudicialOfficer()
-    {   
+    {
         $pop = District::with('sub_divisions')->get();
-        return view('judicial.add_judicial_officer', compact('pop'));
+        $pop_sub_div = SubDivision::all();
+        return view('judicial.add_judicial_officer', compact('pop', 'pop_sub_div'));
     }
 
-    public function storeJudicialOfficer()
+    public function gradeData(Request $request)
     {
-        // return view('judicial.add_judicial_officer');
+
+        $max_priority = JudicialOfficers::where('jo_grade', $request->grade_val)->max('jo_priority');
+        $data = $max_priority + 1;
+        return response()->json($data ?? '');
+    }
+
+    public function storeJudicialOfficer(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request->all());
+        // exit;
+        $this->validate($request, [
+            'jo_status' => 'required',
+            'jo_initials' => 'required',
+            'jo_fname' => 'required|max:100|string',
+            'jo_full_name' => 'required|max:225|string',
+            'jo_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:50000',
+            'jo_grade' => 'required',
+            'jo_desg' => 'required|max:200|string',
+            'jo_pop_district' => 'required|array|max:10',
+            'jo_dob' => 'required|date',
+            'jo_qual' => 'required|max:50|string'
+        ]);
+
+        try {
+            if (!$request->hasFile('jo_image')) {
+                $img_url = null;
+            } else {
+                $image = $request->file('jo_image');
+                $new_name = $request->input('jo_full_name') . '.' . $image->getClientOriginalExtension();
+                $folder_path = public_path('upload/judicial officers');
+                if (!is_dir($folder_path)) {
+                    mkdir($folder_path, 0755, true);
+                }
+                $image->move($folder_path, $new_name);
+                $img_url = "upload/judicial officers/" . $new_name;
+            }
+
+            $judicial_officer = new JudicialOfficers();
+            $judicial_officer->jo_code = $request->input('jo_code');
+            $judicial_officer->jo_title = $request->input('jo_initials');
+            $judicial_officer->jo_first_name = $request->input('jo_fname');
+            $judicial_officer->jo_middle_name = $request->input('jo_mname');
+            $judicial_officer->jo_last_name = $request->input('jo_lname');
+            $judicial_officer->jo_name = $request->input('jo_full_name');
+            $judicial_officer->jo_photo = $img_url;
+            $judicial_officer->jo_grade = $request->input('jo_grade');
+            $judicial_officer->jo_priority = $request->input('jo_priority');
+            $judicial_officer->jo_designation = $request->input('jo_desg');
+            $judicial_officer->jo_mslsa = $request->input('jo_mslsa');
+            $judicial_officer->jo_msja = $request->input('jo_msja');
+            $judicial_officer->jo_pop_district = json_encode($request->input('jo_pop_district'));
+            $judicial_officer->jo_pop_sub_div = json_encode($request->input('jo_pop_sub_div'));
+            $judicial_officer->jo_dob = $request->input('jo_dob');
+            $judicial_officer->jo_qualification = $request->input('jo_qual');
+            $judicial_officer->jo_doa = $request->input('dt_appt');
+            $judicial_officer->jo_display = $request->input('jo_status');
+            $judicial_officer->jo_telephone_no = $request->input('telephone');
+            $judicial_officer->jo_fax_no = $request->input('fax');
+            $judicial_officer->jo_mobile_no = $request->input('mobile');
+            $judicial_officer->jo_email_id = $request->input('email');
+            $judicial_officer->save();
+            return redirect()->route('add_jud_officer')->with('success', 'Judicial Officer Added Successfully.');
+        } catch (\Throwable $e) {
+            return redirect()->route('add_jud_officer')->with('fail', 'Officer Not Added. Error: ' . $e->getMessage());
+        }
     }
 
     public function viewJudicialOfficer()
